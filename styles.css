@@ -1,0 +1,246 @@
+:root {
+    color-scheme: light dark;
+    --bg: #14171a;
+    --surface: #1e2227;
+    --surface-alt: #21262d;
+    --text: #e6edf3;
+    --text-muted: #8b949e;
+    --accent: #2ea043;
+    --accent-contrast: #0b1f0f;
+    --border: rgba(255, 255, 255, 0.08);
+    --danger: #f85149;
+    --shadow: 0 18px 30px rgba(0, 0, 0, 0.35);
+    font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+@media (prefers-color-scheme: light) {
+    :root {
+        --bg: #f5f7fb;
+        --surface: #fff;
+        --surface-alt: #f2f4f8;
+        --text: #1f2933;
+        --text-muted: #52606d;
+        --accent: #2563eb;
+        --accent-contrast: #f1f5ff;
+        --border: rgba(31, 41, 51, 0.1);
+        --shadow: 0 12px 25px rgba(96, 125, 139, 0.18);
+    }
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+}
+
+.noscript-warning {
+    background: var(--danger);
+    color: #fff;
+    padding: 0.75rem 1.5rem;
+    text-align: center;
+    font-weight: 600;
+}
+
+.app {
+    width: min(960px, 90vw);
+    margin: 3rem auto;
+    display: grid;
+    gap: 1.5rem;
+}
+
+.app__header h1 {
+    margin-bottom: 0.25rem;
+    font-size: clamp(1.8rem, 4vw, 2.2rem);
+}
+
+.app__header p {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+.card {
+    background: var(--surface);
+    border-radius: 18px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    overflow: hidden;
+}
+
+.card__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 1.5rem 0.5rem;
+}
+
+.card__body {
+    padding: 0 1.5rem 1.5rem;
+    display: grid;
+    gap: 0.75rem;
+}
+
+.primary,
+.secondary {
+    font: inherit;
+    padding: 0.6rem 1.4rem;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.1s ease, box-shadow 0.1s ease, opacity 0.2s ease;
+    font-weight: 600;
+}
+
+.primary {
+    background: var(--accent);
+    color: var(--accent-contrast);
+    box-shadow: 0 12px 20px rgba(46, 160, 67, 0.25);
+}
+
+.primary:disabled,
+.secondary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.primary:not(:disabled):hover,
+.secondary:not(:disabled):hover {
+    transform: translateY(-1px);
+}
+
+.secondary {
+    background: var(--surface-alt);
+    color: var(--text);
+    border: 1px solid var(--border);
+}
+
+.status {
+    margin: 0.5rem 0 0;
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.status--idle {
+    color: var(--text-muted);
+}
+
+.status--connected {
+    color: var(--accent);
+}
+
+.status--error {
+    color: var(--danger);
+}
+
+label {
+    font-weight: 600;
+}
+
+select,
+input[type="file"],
+input[type="range"] {
+    width: 100%;
+    font: inherit;
+}
+
+select,
+input[type="file"] {
+    padding: 0.55rem 0.75rem;
+    border-radius: 10px;
+    background: var(--surface-alt);
+    color: var(--text);
+    border: 1px solid var(--border);
+}
+
+.library .divider {
+    height: 1px;
+    background: var(--border);
+    margin: 0.5rem 0;
+}
+
+.muted {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin: 0.25rem 0 0;
+}
+
+.controls {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.slider-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+}
+
+.progress {
+    height: 10px;
+    background: var(--surface-alt);
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.progress__bar {
+    height: 100%;
+    width: 0;
+    background: linear-gradient(90deg, var(--accent), #58d68d);
+    border-radius: inherit;
+    transition: width 0.2s ease;
+}
+
+.log {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    max-height: 220px;
+    overflow-y: auto;
+    display: grid;
+    gap: 0.35rem;
+}
+
+.log li {
+    background: var(--surface-alt);
+    border-radius: 10px;
+    padding: 0.45rem 0.65rem;
+    border: 1px solid transparent;
+    font-size: 0.85rem;
+}
+
+.log li[data-type="error"] {
+    border-color: rgba(248, 81, 73, 0.5);
+    color: var(--danger);
+}
+
+.log time {
+    font-family: "Fira Code", "SFMono-Regular", Consolas, monospace;
+    color: var(--text-muted);
+    margin-right: 0.5rem;
+}
+
+@media (max-width: 720px) {
+    .app {
+        width: min(92vw, 640px);
+        margin: 2rem auto;
+    }
+
+    .controls {
+        flex-direction: column;
+    }
+
+    .primary,
+    .secondary {
+        width: 100%;
+    }
+}

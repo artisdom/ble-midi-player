@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BLE MIDI Player</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<noscript>
+    <div class="noscript-warning">
+        This experience needs JavaScript enabled.
+    </div>
+</noscript>
+<main class="app">
+    <header class="app__header">
+        <h1>BLE MIDI Player</h1>
+        <p>Connect to a Bluetooth LE MIDI instrument, then stream one of the built-in songs or upload your own.</p>
+    </header>
+
+    <section class="card" aria-labelledby="connection-heading">
+        <div class="card__header">
+            <h2 id="connection-heading">Bluetooth Connection</h2>
+        </div>
+        <div class="card__body">
+            <button id="connect-btn" class="primary">Connect to BLE MIDI Device</button>
+            <button id="disconnect-btn" class="secondary" disabled>Disconnect</button>
+            <p id="device-status" class="status status--idle">Not connected</p>
+        </div>
+    </section>
+
+    <section class="card" aria-labelledby="library-heading">
+        <div class="card__header">
+            <h2 id="library-heading">MIDI Library</h2>
+        </div>
+        <div class="card__body library">
+            <label for="builtin-select">Built-in tracks</label>
+            <select id="builtin-select">
+                <option value="" selected disabled>Select a track</option>
+            </select>
+
+            <div class="divider" role="separator" aria-hidden="true"></div>
+
+            <label for="file-input">Upload a MIDI file</label>
+            <input id="file-input" type="file" accept=".mid,.midi,audio/midi">
+
+            <p id="track-info" class="muted">Choose a track to see details.</p>
+        </div>
+    </section>
+
+    <section class="card" aria-labelledby="playback-heading">
+        <div class="card__header">
+            <h2 id="playback-heading">Playback</h2>
+        </div>
+        <div class="card__body playback">
+            <div class="controls">
+                <button id="play-btn" class="primary" disabled>Play</button>
+                <button id="stop-btn" class="secondary" disabled>Stop</button>
+            </div>
+            <label class="slider-label" for="tempo-slider">
+                Tempo
+                <span id="tempo-value">100%</span>
+            </label>
+            <input id="tempo-slider" type="range" min="50" max="150" value="100">
+
+            <div class="progress">
+                <div id="progress-bar" class="progress__bar"></div>
+            </div>
+            <p id="playback-status" class="muted">No track loaded.</p>
+        </div>
+    </section>
+
+    <section class="card" aria-labelledby="log-heading">
+        <div class="card__header">
+            <h2 id="log-heading">Event Log</h2>
+            <button id="clear-log-btn" class="secondary">Clear</button>
+        </div>
+        <div class="card__body">
+            <ul id="log" class="log" aria-live="polite"></ul>
+        </div>
+    </section>
+</main>
+
+<script src="vendor/ToneMidi.min.js"></script>
+<script type="module" src="app.js"></script>
+</body>
+</html>
